@@ -9,6 +9,13 @@
       <link rel="stylesheet" href={% static 'css\style.css' %}>
 </head>
 <body>
-<h1>Homepage holder</h1>
+
+<h1>Homepage holder</h1>\
+{% if user_logged_in %}
+      <h1>Logged in!</h1>
+      <a class="btn btn-danger" href="/authenticate/logout">Loggout</a>
+{% else %}
+      <a class="btn btn-info" href="/authenticate">Login</a>
+{% endif %}
 </body>
 </html>
