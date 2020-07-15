@@ -14,25 +14,20 @@
                   <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                  {% comment %} <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                  </li> {% endcomment %}
-            </ul>
-            {% if user_logged_in %}
-                  <span class="navbar-text">
-                        <a class="nav-link info" href="/new_product">Create product</a>
-                  </span>
-                  <span class="navbar-text">
-                        <a class="nav-link danger" href="/authenticate/logout">Loggout</a>
-                  </span>
-            {% else %}
-                  <span class="navbar-text">
-                        <a class="nav-link info" href="/authenticate">Login</a>
-                  </span>
-            {% endif %}
-      
-      </div>
+                  <ul class="navbar-nav mr-auto"></ul>
+                  {% if user_logged_in %}
+                        <span class="navbar-text">
+                              <a class="nav-link info" href="/new_product">Create product</a>
+                        </span>
+                        <span class="navbar-text">
+                              <a class="nav-link danger" href="/authenticate/logout">Loggout</a>
+                        </span>
+                  {% else %}
+                        <span class="navbar-text">
+                              <a class="nav-link info" href="/authenticate">Login</a>
+                        </span>
+                  {% endif %}
+            </div>
       </nav>
       
       <div class="container">
