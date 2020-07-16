@@ -6,8 +6,15 @@ from apps.authenticate.models import User
 def index(request):    
       context = {
             'user_logged_in': False,
-            'products' : Product.objects.all()
+            
+            'categories' : Category.objects.all()
       }
+      
+      if 'category' in request.session:
+            context['products'] = Product.objects.filter(categories__id = request.session['category'])
+      else:
+            context['products'] = Product.objects.all()
+
       if 'uid' in request.session:
             context['user_logged_in'] = True
             context['user_data'] = User.objects.get(id=request.session['uid'])
@@ -67,4 +74,12 @@ def save_profile_image(request):
             user.profile_image = pic
             user.save()
       return redirect('/profile')
-      
+
+def filter_products(request, category_id):
+      request.session['category'] = category_id
+      return redirect('/')
+
+def remove_filter_products(request):
+      if 'category' in request.session:
+            del request.session['category'] 
+      return redirect('/')
