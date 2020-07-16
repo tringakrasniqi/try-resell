@@ -5,22 +5,24 @@
      {% include 'includes/navbar.html' %}
       
       <div class="container">
-            {% for product in products %}
-                  <div class="card m-3" style="width: 18rem;">
-                        <div class="card-body">
-                              <h5 class="card-title">{{product.title}}</h5>
-                              {% if products.categories.all.count > 0 %}
-                                    <h6 class="card-subtitle mb-2 text-muted">{{product.categories.all}}</h6>
-                              {% endif %}
-                              <p class="card-text">{{product.description}}</p>
-                              <p class="card-text">{{product.price}} $</p>
-                              <a href="/product/{{product.id}}" class="card-link">See more</a>
-                              {% if user_logged_in %}
-                                    <a href="#" class="card-link">Add to cart</a>
-                              {% endif %}
+            <div class="row">
+                  {% for product in products %}
+                        <div class="card m-3" style="width: 18rem;">
+                              <div class="card-body">
+                                    <h5 class="card-title">{{product.title}}</h5>
+                                    {% if products.categories.all.count > 0 %}
+                                          <h6 class="card-subtitle mb-2 text-muted">{{product.categories.all}}</h6>
+                                    {% endif %}
+                                    <p class="card-text">{{product.description}}</p>
+                                    <p class="card-text">{{product.price}} $</p>
+                                    <a href="/product/{{product.id}}" class="card-link">See more</a>
+                                    {% if user_logged_in and product.creator.id != user_data.id%}
+                                          <a href="#" class="card-link">Add to cart</a>
+                                    {% endif %}
+                              </div>
                         </div>
-                  </div>
-            {% endfor %}
+                  {% endfor %}
+            </div>
       </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

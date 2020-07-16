@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from apps.authenticate.models import User
 
 def index(request):    
@@ -19,14 +19,17 @@ def new_product(request):
             return redirect('/')
       else:
             context = {
-                  'user_logged_in' : True
+                  'user_logged_in' : True,
+                  'categories': Category.objects.all()
             }
             return render(request, 'new_product.html', context)
 
 def create_product(request):
       if 'uid' in request.session:
             logged_user = User.objects.get(id=request.session['uid'])
-            Product.objects.create(title=request.POST['title'], description=request.POST['description'], price=request.POST['price'], condition=request.POST['condition'], creator=logged_user)
+            category = Category.objects.get(id=request.POST["category"])
+            product = Product.objects.create(title=request.POST['title'], description=request.POST['description'], price=request.POST['price'], condition=request.POST['condition'], creator=logged_user)
+            product.categories.add(category)
       return redirect('/')
 
 def show_product(request, product_id):
@@ -47,3 +50,10 @@ def show_user_profile(request):
             return render(request, 'profile.html', context)
       else:
             return render(request,'index.html')
+
+def delete_product(request, product_id):
+      if 'uid' in request.session:
+            product = Product.objects.get(id=product_id)
+            product.delete()
+      return redirect('/profile')
+      

@@ -38,3 +38,11 @@ def register(request):
 def logout(request):
       request.session.flush()
       return redirect('/')
+
+
+def delete_user(request):
+      if 'uid' in request.session:
+            user = User.objects.get(id=request.session['uid'])
+            user.delete()
+            request.session.flush()
+      return redirect('/')

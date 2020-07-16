@@ -4,24 +4,38 @@
 <body>
       {% include 'includes/navbar.html' %}
       <div class="container">
-            <form action="/create_product" method="POST">
+            <form action="/product/create" method="POST">
                   {% csrf_token %}
                   <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" >
+                        <input type="text" class="form-control" id="title" name="title">
                   </div>
                   <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" >
+                        <input type="text" class="form-control" id="description" name="description">
                   </div>
                   <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" >
+                        <input type="number" class="form-control" id="price" name="price">
                   </div>
                   <div class="form-group">
                         <label for="condition">Condition</label>
-                        <input type="text" class="form-control" id="condition" name="condition" >
+                        <input type="text" class="form-control" id="condition" name="condition">
                   </div>
+                  <div class="form-group">
+                       <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                    <label class="input-group-text" for="categorySelect">Category</label>
+                              </div>
+                              <select class="custom-select" id="categorySelect" name="category">
+                                    <option selected>Choose...</option>
+                                    {% for category in categories %}
+                                          <option value="{{category.id}}">{{ category.name }}</option>
+                                    {% endfor %}
+                              </select>
+                        </div>
+                  </div> 
+                  
                   <button type="submit" class="btn btn-info">Publish</button>
             </form>
       </div>
