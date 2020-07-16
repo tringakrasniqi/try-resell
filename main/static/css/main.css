@@ -1,0 +1,11 @@
+.profile-avatar {
+      border: 1px solid #333;
+      border-radius: 50%;
+      font-size: 6em;
+      padding: 20px
+}
+
+.profile-image {
+      border-radius: 50%;
+      width: 200px;
+}

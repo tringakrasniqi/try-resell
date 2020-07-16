@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
 from .models import Product, Category
 from apps.authenticate.models import User
 
@@ -55,5 +56,15 @@ def delete_product(request, product_id):
       if 'uid' in request.session:
             product = Product.objects.get(id=product_id)
             product.delete()
+      return redirect('/profile')
+
+def save_profile_image(request):
+      if 'uid' in request.session:
+            user = User.objects.get(id = request.session['uid'])
+            pic = request.FILES['profile_pic']
+            fs = FileSystemStorage()
+            fs.save(pic.name, pic)
+            user.profile_image = pic
+            user.save()
       return redirect('/profile')
       

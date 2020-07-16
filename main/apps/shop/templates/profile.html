@@ -1,6 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
+<head>
 {% include 'includes/head_links.html' %}
+<link rel="stylesheet" href="{% static 'css/main.css'%}"/>
+</head>
 <body>
       {% include 'includes/navbar.html' %}
       <div class="container">
@@ -9,8 +14,21 @@
                   <h2>{{user_data.first_name}} {{user_data.last_name}}</h2>
                   <p>{{user_data.alias}}</p>
                   <div>
-                        <span style="border: 1px solid #333; border-radius: 50%; font-size: 6em; padding: 20px" class="material-icons user-avatar">person</span>
-                        <a href="#" class="btn btn-info" style="display:block; margin: 10px;">Edit profile picture</a>
+                        {% if user_data.profile_image %}
+                              <img class="profile-image" src="{{user_data.profile_image.url}}">
+                        {% else %}
+                              <span class="profile-avatar material-icons user-avatar">person</span>
+                        {% endif %}
+                        <form method="POST" action="/profile/image" enctype="multipart/form-data">
+                              {% csrf_token %}
+
+                              <div class="form-group mt-3">
+                                    <label for="profile_pic">Upload Profile Picture:</label>
+                                    <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+                              </div>
+                              <button type="submit" class="btn btn-info mt-3">Save</button>
+                        </form>
+                        
                   </div>
                   <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="/product/new">Create a product to sell</a></li>
