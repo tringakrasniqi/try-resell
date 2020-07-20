@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from .models import Product, Category
 from apps.authenticate.models import User
+from django.db.models import Q
+from django.db import models
+
 
 def index(request):    
       context = {
@@ -41,10 +44,22 @@ def create_product(request):
       return redirect('/')
 
 def show_product(request, product_id):
+      product = Product.objects.get(id=product_id)
       context = {
             'user_logged_in' : True,
-            'product_info' :  Product.objects.get(id=product_id)
+            'product_info' :  product,
+            
       }
+
+      category = product.categories.first()
+      if category != None:
+            filters = models.Q()
+            if product:
+                  filters &= models.Q(
+                        categories__name = category.name,
+                  )
+            similar_products = Product.objects.filter(filters).exclude(id=product.id)
+            context['similar_products'] = similar_products
       return render(request, 'show_product.html', context)
 
 def show_user_profile(request):

@@ -6,11 +6,39 @@
 <body>
       {% include 'includes/navbar.html' %}
       <div class="container">
-            {{product_info.title}}
-            {{product_info.description}}
-            {{product_info.price}}
-            {{product_info.condition}}
-
+            <div class="row mt-4">
+                  <div class="col col-8">
+                        <h2>{{product_info.title}}</h2>
+                        <p>{{product_info.description}}<p>
+                        <p class="font-weight-bolder">{{product_info.price}}$<p>
+                        <p>{{product_info.condition}}</p>
+                        <p>{{product_info.categories.name}}</p>
+                  </div>
+                  <div class="col col-4">
+                        <h5>Similar products:</h5>
+                        {% for product in similar_products %}
+                              <div class="card m-3" style="width: 18rem;">
+                                    <div class="card-body">
+                                          <h5 class="card-title">{{product.title}}</h5>
+                                          {% if products.categories.all.count > 0 %}
+                                                <h6 class="card-subtitle mb-2 text-muted">{{product.categories.all}}</h6>
+                                          {% endif %}
+                                          <p class="card-text">{{product.description}}</p>
+                                          <p class="card-text">{{product.price}} $</p>
+                                          <a href="/product/{{product.id}}" class="card-link">See more</a>
+                                          {% if user_logged_in and product.creator.id != user_data.id%}
+                                                <a href="#" class="card-link">Add to cart</a>
+                                          {% endif %}
+                                    </div>
+                              </div>
+                        {% endfor %}
+                  </div>
+                  
+                  {% comment %} {% for prod in similar_products %}
+                        {{prod.title}}
+                  {% endfor %} {% endcomment %}
+                  {% comment %} {{similar_products}} {% endcomment %}
+            </div>
       </div>
 </body>
 </html>

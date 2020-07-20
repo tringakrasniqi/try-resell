@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.shop.urls')),
     path('authenticate/', include('apps.authenticate.urls')),
-    path('order/', include('apps.order.urls'))
+    path('shopping/', include('apps.shopping_cart.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
