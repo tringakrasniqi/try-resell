@@ -37,23 +37,54 @@
                   </ul>
                   </div>
                   <div class="col-8">
-                        <h3>Your selling products</h3>
-                        <div class="list-group">
-                        {% if selling_products.count > 0 %}
-                              {% for product in selling_products %}
-                                    <a href="/product/{{product.id}}" class="list-group-item list-group-item-action mt-2">
-                                          <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1">{{product.title}}</h5>
-                                                <small>{{product.created_at}}</small>
-                                          </div>
-                                          <p class="mb-1">{{product.description}}</p>
-                                          <small>{{product.price}}$</small>
-                                    </a><a class="list-group-item" href="/product/{{product.id}}/delete">Remove product</a>
-                              {% endfor %}
-                        
-                        {% else %}
-                              <p> You haven't placed a product to sell yet! </p>
-                        {% endif %}
+                        <div class="row">
+                              <h3>Your selling products</h3>
+                              <div class="list-group">
+                              {% if selling_products.count > 0 %}
+                                    {% for product in selling_products %}
+                                          <a href="/product/{{product.id}}" class="list-group-item list-group-item-action mt-2">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                      <h5 class="mb-1">{{product.title}}</h5>
+                                                      <small>{{product.created_at}}</small>
+                                                </div>
+                                                <p class="mb-1">{{product.description}}</p>
+                                                <small>{{product.price}}$</small>
+                                          </a><a class="list-group-item" href="/product/{{product.id}}/delete">Remove product</a>
+                                    {% endfor %}
+                              
+                              {% else %}
+                                    <p> You haven't placed a product to sell yet! </p>
+                              {% endif %}
+                              </div>
+                        <div>
+                        <div class="row mt-4">
+                              <h3 class=" ml-4">Previous orders:</h3>
+                              <div class="list-group">
+                              {% if orders.count > 0 %}
+                                    <table class="table">
+                                          <thead>
+                                          <tr>
+                                                <th scope="col">Reference code</th>
+                                                <th scope="col">Done at</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Total</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          {% for order_item in orders %}
+                                                <tr>
+                                                      <td>{{order_item.reference_code}}</td>
+                                                      <td>{{order_item.created_at}}</td>
+                                                      <td>{{order_item.is_order_complete}} - Complete</td>
+                                                      <td>{{order.get_total_price}}$</td>
+                                                </tr>
+                                          {% endfor %}
+                                          </tbody>
+                                    </table>                              
+                              {% else %}
+                                    <p> You don't have any order yet! </p>
+                              {% endif %}
+                              </div>
                         </div>
                   </div>
             </div>

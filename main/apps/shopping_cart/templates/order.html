@@ -13,6 +13,8 @@
       <div class="container">
             <div class="row">
                   <div class="col col-10">
+                  {% if order.order_items.count > 0 %}
+                 
                         <table class="table">
                         <thead>
                         <tr>
@@ -42,15 +44,20 @@
                               </tr>
                         </tbody>
                         </table>
+                        {% else %}
+                              <p>Your shopping cart is empty!</p>
+                        {% endif %}
                   </div>
             </div>
             <div class="row">
                   <div class="col">
                         <a href="/" class="btn btn-warning">Continue shopping</a>
                   </div>
-                  <div class="col">
-                        <a href="#" class="btn btn-info">Checkout</a>
-                  </div>
+                  {% if order.order_items.count > 0 %}
+                        <div class="col">
+                              <a href="/shopping/checkout/{{order.id}}" class="btn btn-info">Checkout</a>
+                        </div>
+                  {% endif %}
             </div>
       </div>
 

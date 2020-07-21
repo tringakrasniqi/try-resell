@@ -74,7 +74,8 @@ def show_user_profile(request):
             context = {
                   'user_logged_in' : True,
                   'user_data' : logged_in_user,
-                  'selling_products': logged_in_user.selling_products.all()
+                  'selling_products': logged_in_user.selling_products.all(),
+                  'orders' : logged_in_user.has_orders.all()
             }
             return render(request, 'profile.html', context)
       else:

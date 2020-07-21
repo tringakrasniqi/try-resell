@@ -11,9 +11,10 @@ def index(request):
       if 'uid' in request.session:
             context['user_logged_in'] = True
             user = User.objects.get(id=request.session['uid'])
-            order = Order.objects.filter(owner=user)
-            if order:
-                  context['order'] = order.first()
+            orders = Order.objects.filter(owner=user)
+            incomplete_orders = orders.exclude(is_order_complete=True)
+            if incomplete_orders:
+                  context['order'] = incomplete_orders.first()
             else: 
                   context['message'] = "Continue Shopping"
       return render(request, 'order.html', context)
@@ -36,3 +37,21 @@ def delete_order_item(request, order_item_id):
             order_item = OrderItem.objects.get(id = order_item_id)
             order.order_items.remove(order_item)
       return redirect('/shopping')
+
+def complete_order(request, order_id):
+      if 'uid' in request.session:
+            order = Order.objects.get(id=order_id)
+            if order.order_items.count != None:
+                  order.is_order_complete = True
+                  order.save()
+                  return redirect('/shopping/checkout')
+            else: 
+                  return redirect('/shopping')
+
+def checkout_order(request):
+      context = {
+            'user_logged_in' : False
+      }
+      if 'uid' in request.session:
+            context['user_logged_in'] = True
+      return render(request, 'order_complete.html', context)
