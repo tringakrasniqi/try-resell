@@ -28,7 +28,7 @@
                                     <p class="card-text">{{product.price}} $</p>
                                     <a href="/product/{{product.id}}" class="card-link">See more</a>
                                     {% if user_logged_in and product.creator.id != user_data.id%}
-                                          <a href="#" class="card-link">Add to cart</a>
+                                          <a href="/shopping/add/{{product.id}}" class="card-link">Add to cart</a>
                                     {% endif %}
                               </div>
                         </div>

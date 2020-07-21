@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>TryResell</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+ {% include 'includes/navbar.html' %}
+
+      <div class="container">
+            <div class="row">
+                  <div class="col col-10">
+                        <table class="table">
+                        <thead>
+                        <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order_item in order.order_items.all %}
+                              <tr>
+                                    <th>{{order_item.product.title}}</th>
+                                    <td>{{order_item.quantity}}</td>
+                                    <td>{{order_item.product.price}}$</td>
+                                    <td>
+                                          <a href="/shopping/delete/{{order_item.id}}"><span class="material-icons">delete_outline</span></a>
+                                    </td>
+                              </tr>
+                        {% endfor %}
+                              <tr>
+                                    <th></th>
+                                    <td>Total</td>
+                                    <td>{{order.get_total_price}}$</td>
+                                    <td>
+                                    </td>
+                              </tr>
+                        </tbody>
+                        </table>
+                  </div>
+            </div>
+            <div class="row">
+                  <div class="col">
+                        <a href="/" class="btn btn-warning">Continue shopping</a>
+                  </div>
+                  <div class="col">
+                        <a href="#" class="btn btn-info">Checkout</a>
+                  </div>
+            </div>
+      </div>
+
+</body>
+</html>
