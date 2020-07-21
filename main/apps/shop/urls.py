@@ -10,5 +10,5 @@ urlpatterns = [
     path('product/filter/<int:category_id>', views.filter_products),
     path('product/filter/remove', views.remove_filter_products),
     path('profile', views.show_user_profile),
-    path('profile/image', views.save_profile_image)
+    path('profile/image', views.save_profile_image),
 ]

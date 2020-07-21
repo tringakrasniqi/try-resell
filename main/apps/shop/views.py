@@ -9,14 +9,18 @@ from django.db import models
 def index(request):    
       context = {
             'user_logged_in': False,
-            
             'categories' : Category.objects.all()
       }
       
+      # if 'search_query' in request.session:
+      #       context['products'] = Product.objects.filter(title__contains = request.session['search_query'])
       if 'category' in request.session:
             context['products'] = Product.objects.filter(categories__id = request.session['category'])
       else:
             context['products'] = Product.objects.all()
+
+      # print(context['products'])
+      # print(request.session['search_query'])
 
       if 'uid' in request.session:
             context['user_logged_in'] = True

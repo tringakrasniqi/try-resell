@@ -33,7 +33,7 @@ def add_to_cart(request, product_id):
 
 def delete_order_item(request, order_item_id):
       if 'uid' in request.session:
-            order = Order.objects.get(owner__id = request.session['uid'])
+            order = Order.objects.filter(owner__id = request.session['uid'], is_order_complete=False).first()
             order_item = OrderItem.objects.get(id = order_item_id)
             order.order_items.remove(order_item)
       return redirect('/shopping')

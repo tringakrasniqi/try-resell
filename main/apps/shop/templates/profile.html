@@ -67,7 +67,6 @@
                                                 <th scope="col">Reference code</th>
                                                 <th scope="col">Done at</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Total</th>
                                           </tr>
                                           </thead>
                                           <tbody>
@@ -75,8 +74,7 @@
                                                 <tr>
                                                       <td>{{order_item.reference_code}}</td>
                                                       <td>{{order_item.created_at}}</td>
-                                                      <td>{{order_item.is_order_complete}} - Complete</td>
-                                                      <td>{{order.get_total_price}}$</td>
+                                                      <td>{% if order_item.is_order_complete %} Complete {% else %} Pending {% endif %}</td>
                                                 </tr>
                                           {% endfor %}
                                           </tbody>
