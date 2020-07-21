@@ -41,6 +41,12 @@ def create_product(request):
             category = Category.objects.get(id=request.POST["category"])
             product = Product.objects.create(title=request.POST['title'], description=request.POST['description'], price=request.POST['price'], condition=request.POST['condition'], creator=logged_user)
             product.categories.add(category)
+            if 'product_image' in request.FILES != None:
+                  pic = request.FILES['product_image']
+                  fs = FileSystemStorage()
+                  fs.save(pic.name, pic)
+                  product.product_image = pic
+                  product.save()
       return redirect('/')
 
 def show_product(request, product_id):

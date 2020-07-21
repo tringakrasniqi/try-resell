@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{% load static %}
 {% include 'includes/head_links.html' %}
 </head>
 <body>
@@ -19,6 +20,11 @@
             <div class="row">
                   {% for product in products %}
                         <div class="card m-3" style="width: 18rem;">
+                              {% if product.product_image %}
+                                    <img src="{{product.product_image.url}}" class="card-img-top" alt="" style="height:8rem; background-size:contain"/>
+                              {% else %}
+                                    <img src="{% static 'svgs/undraw_photo.svg' %}" class="card-img-top pt-2" alt="" style="height:8rem; background-size:contain"/>
+                              {% endif %}
                               <div class="card-body">
                                     <h5 class="card-title">{{product.title}}</h5>
                                     {% if products.categories.all.count > 0 %}

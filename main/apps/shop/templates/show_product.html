@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+{% load static %}
 {% include 'includes/head_links.html' %}
 </head>
 <body>
       {% include 'includes/navbar.html' %}
       <div class="container">
             <div class="row mt-4">
-                  <div class="col col-8">
+                  <div class="col col-4">
+                  
+                        {% if product_info.product_image %}
+                              <img src="{{product_info.product_image.url}}" class="card-img-top" alt=""/>
+                        {% else %}
+                              <img src="{% static 'svgs/undraw_photo.svg' %}" class="card-img-top pt-2" alt="" style="height:8rem;"/>
+                        {% endif %}
+                  </div>
+                  <div class="col col-4">
                         <h2>{{product_info.title}}</h2>
                         <p>{{product_info.description}}<p>
                         <p class="font-weight-bolder">{{product_info.price}}$<p>
@@ -15,29 +24,26 @@
                         <p>{{product_info.categories.name}}</p>
                   </div>
                   <div class="col col-4">
-                        <h5>Similar products:</h5>
-                        {% for product in similar_products %}
-                              <div class="card m-3" style="width: 18rem;">
-                                    <div class="card-body">
-                                          <h5 class="card-title">{{product.title}}</h5>
-                                          {% if products.categories.all.count > 0 %}
-                                                <h6 class="card-subtitle mb-2 text-muted">{{product.categories.all}}</h6>
-                                          {% endif %}
-                                          <p class="card-text">{{product.description}}</p>
-                                          <p class="card-text">{{product.price}} $</p>
-                                          <a href="/product/{{product.id}}" class="card-link">See more</a>
-                                          {% if user_logged_in and product.creator.id != user_data.id%}
-                                                <a href="#" class="card-link">Add to cart</a>
-                                          {% endif %}
+                        {% if similar_products.count > 0 %}
+                              <h5>Similar products:</h5>
+                              {% for product in similar_products %}
+                                    <div class="card m-3" style="width: 18rem;">
+                                          <div class="card-body">
+                                                <h5 class="card-title">{{product.title}}</h5>
+                                                {% if products.categories.all.count > 0 %}
+                                                      <h6 class="card-subtitle mb-2 text-muted">{{product.categories.all}}</h6>
+                                                {% endif %}
+                                                <p class="card-text">{{product.description}}</p>
+                                                <p class="card-text">{{product.price}} $</p>
+                                                <a href="/product/{{product.id}}" class="card-link">See more</a>
+                                                {% if user_logged_in and product.creator.id != user_data.id%}
+                                                      <a href="#" class="card-link">Add to cart</a>
+                                                {% endif %}
+                                          </div>
                                     </div>
-                              </div>
-                        {% endfor %}
+                              {% endfor %}
+                        {% endif %}
                   </div>
-                  
-                  {% comment %} {% for prod in similar_products %}
-                        {{prod.title}}
-                  {% endfor %} {% endcomment %}
-                  {% comment %} {{similar_products}} {% endcomment %}
             </div>
       </div>
 </body>
