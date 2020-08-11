@@ -9,7 +9,9 @@
       <link rel="stylesheet" href={% static 'css\style.css' %}>
 </head>
 <body>
-      <div class="container">
+{% include 'includes/navbar.html' %}
+<div class="container">
+      <div class="wrapper">
             <div class="row">
                   {% if messages %}
                         <ul class="messages">    
@@ -68,5 +70,6 @@
                   </div>
             </div>
       </div>
+</div>
 </body>
 </html>
