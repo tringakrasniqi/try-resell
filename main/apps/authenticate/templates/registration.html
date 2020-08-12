@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'includes/head_links.html' %}
+<body>
+{% include 'includes/navigation_bar.html' %}
+<div class="container">
+      <div class="wrapper">
+            <div class="row">
+                  {% if messages %}
+                        <ul class="messages">    
+                        {% for message in messages %}    
+                              <li class="text-danger">{{ message }}</li>    
+                        {% endfor %}
+                        </ul>
+                  {% endif %} 
+            </div>
+            <div class="row d-flex justify-content-center pt-5 ">
+                  <h3>Create Account</h3>
+            </div>
+            <hr/>
+            <div class="row">
+                  <div class="col d-flex justify-content-center">
+                        <form action="/authenticate/register" method="POST">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" >
+                              </div>
+                              <div class="form-group">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" >
+                              </div>
+                              <div class="form-group">
+                                    <label for="alias">Alias:</label>
+                                    <input type="text" class="form-control" id="alias" name="alias" >
+                              </div>
+                              <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" >
+                              </div>
+                              <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password" >
+                              </div>
+                              <div class="form-group">
+                                    <label for="confirm_password">Confirm pw</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" >
+                              </div>
+                              <button type="submit" class="btn btn-info">Register</button>
+                        </form>
+                  </div>
+            </div>
+            <p>Already have an account? <a href="/authenticate">Login</a></p>
+      </div>
+</div>
+</body>
+</html>

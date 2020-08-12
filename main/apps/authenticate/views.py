@@ -21,6 +21,9 @@ def login(request):
             request.session['uid'] = user[0].id 
             return redirect('/')
 
+def go_to_register(request):
+      return render(request, 'registration.html')
+
 def register(request):
       errors = User.objects.register_validator(request.POST)
 
