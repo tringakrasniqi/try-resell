@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-{% include 'includes/head_links.html' %}
-<body>
-{% include 'includes/navigation_bar.html' %}
-<div class="container">
-      <div class="wrapper">
-            <div class="row">
-                  {% if messages %}
-                        <ul class="messages">    
-                        {% for message in messages %}    
-                              <li class="text-danger">{{ message }}</li>    
-                        {% endfor %}
-                        </ul>
-                  {% endif %} 
-            </div>
-            <div class="row d-flex justify-content-center pt-5 ">
-                  <h3>Login to TryResell or <a href="register/new">create an account</a></h3>
-            </div>
-            <hr/>
-            <div class="row">
-                  <div class="col d-flex justify-content-center p-2">
-                        
-                        <form action="/authenticate/login" method="POST">
-                              {% csrf_token %}
-                              <div class="form-group">
-                                    <label for="email">Email address</label>
-                                    <input type="text" class="form-control" id="email" name="email" >
+<head>
+      {% include 'includes/head_links.html' %}
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'css/main.css'%}"/>
+</head>
+<body id="login">
+      <div class="container p-5">
+            <div class="wrapper">
+                  <div class="row">
+                        <div class="offset-sm-3 col-sm-6 register pb-5 pt-5">
+                              <div class="row">
+                                    {% if messages %}
+                                          <ul class="messages">    
+                                          {% for message in messages %}    
+                                                <li class="text-danger">{{ message }}</li>    
+                                          {% endfor %}
+                                          </ul>
+                                    {% endif %} 
                               </div>
-                              <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" >
+                              <div class="row">
+                                    <div class="offset-1 col-10">
+                                          <a class="navbar-brand pb-3" href="/"><img style="width:200px" src="{% static 'images/logo.png'%}"/></a>
+                                          <h2>Welcome back.</h2>       
+                                          <p>New here? <a href="register/new">create an account</a></p>      
+                                    </div>
                               </div>
-                              <button type="submit" class="btn btn-info">Login</button>
-                        </form>
+                              <div class="row">
+                                    <div class="offset-sm-1 col-sm-10">
+                                          <form action="/authenticate/login" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                      <label for="email">Email address</label>
+                                                      <input type="text" class="form-control" id="email" name="email" >
+                                                </div>
+                                                <div class="form-group">
+                                                      <label for="password">Password</label>
+                                                      <input type="text" class="form-control" id="password" name="password" >
+                                                </div>
+                                                <button type="submit" class="btn btn-info">Login</button>
+                                          </form>
+                                    </div>
+                              </div>
+                        </div>
                   </div>
             </div>
       </div>
-</div>
 </body>
 </html>
