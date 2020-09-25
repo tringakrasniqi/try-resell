@@ -11,23 +11,23 @@
 }
 
 .register {
-      border: 1px solid #ddd;
-      padding: 10px;
-      background-color: #ffffff;
-      border-radius: 6px;
-      -webkit-box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
+      /* border: 1px solid #ddd; */
+      /* padding: 10px; */
+      /* background-color: #ffffff; */
+      /* border-radius: 6px; */
+      /* -webkit-box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
       -moz-box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
-      box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
+      box-shadow: 5px 5px 5px -5px rgba(221,221,221,1); */
 }
 
-#login {
-      background-image: url("../svgs/undraw_login.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-}
-
-#create_account {
+.register-illustration {
       background-image: url("../svgs/undraw_register.svg");
-      background-position: center;
+      background-size: cover;
+}
+
+.login-illustration {
+      background-image: url("../svgs/undraw_login.svg");
+      background-size: contain;
       background-repeat: no-repeat;
+      background-position: center;
 }

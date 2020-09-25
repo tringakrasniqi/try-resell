@@ -9,7 +9,9 @@
       <div class="container p-5">
             <div class="wrapper">
                   <div class="row">
-                        <div class="offset-sm-3 col-sm-6 register pb-5 pt-5">
+                        <div class="login-illustration col-sm-0 col-md-6">
+                        </div>
+                        <div class="col-sm-10 col-md-6 pb-5 pt-5">
                               <div class="row">
                                     {% if messages %}
                                           <ul class="messages">    
@@ -27,7 +29,7 @@
                                     </div>
                               </div>
                               <div class="row">
-                                    <div class="offset-sm-1 col-sm-10">
+                                    <div class="offset-1 col-10">
                                           <form action="/authenticate/login" method="POST">
                                                 {% csrf_token %}
                                                 <div class="form-group">
