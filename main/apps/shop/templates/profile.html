@@ -11,55 +11,73 @@
       <div class="container">
             <div class="row mt-4 mb-4">
                   <div class="col-4">
-                  <h2>{{user_data.first_name}} {{user_data.last_name}}</h2>
-                  <p>{{user_data.alias}}</p>
-                  <div>
-                        {% if user_data.profile_image %}
-                              <img class="profile-image" src="{{user_data.profile_image.url}}">
-                        {% else %}
-                              <span class="profile-avatar material-icons user-avatar">person</span>
-                        {% endif %}
-                        <form method="POST" action="/profile/image" enctype="multipart/form-data">
-                              {% csrf_token %}
-
-                              <div class="form-group mt-3">
-                                    <label for="profile_pic">Upload Profile Picture:</label>
-                                    <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+                        <div class="row">
+                              <div class="col-4">
+                                    {% if user_data.profile_image %}
+                                          <img class="profile-image" src="{{user_data.profile_image.url}}">
+                                    {% else %}
+                                          <span class="profile-avatar material-icons user-avatar">person</span>
+                                    {% endif %}                                    
                               </div>
-                              <button type="submit" class="btn btn-info mt-3">Save</button>
-                        </form>
-                        
-                  </div>
-                  <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="/product/new">Create a product to sell</a></li>
-                        <li class="list-group-item"><a href="#">Favourite products</a></li>
-                        <li class="list-group-item list-group-item-danger"><a href="/authenticate/account/delete">Delete account</a></li>
-                  </ul>
+                              <div class="col-8">
+                                    <h2>{{user_data.first_name}} {{user_data.last_name}}</h2>
+                                    <p>@{{user_data.alias}}</p>
+                              </div>
+                        </div>
+                        <div class="row">
+                              <div class="col-12">
+                                    <form method="POST" action="/profile/image" enctype="multipart/form-data">
+                                          {% csrf_token %}
+
+                                          <div class="form-group mt-3">
+                                                <label for="profile_pic">Upload Profile Picture:</label>
+                                                <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+                                          </div>
+                                          <butt on type="submit" class="btn btn-info mt-3" style="width: 100%">Save</button>
+                                    </form>
+                              </div>
+                        </div>
+                        <div class="row title">Actions</div>
+                        <div class="row">
+                              <ul class="col-12 list-group list-group-flush">
+                                    <li class="list-group-item"><a href="/product/new">Create a product to sell</a></li>
+                                    <li class="list-group-item"><a href="#">Favourite products</a></li>
+                                    <li class="list-group-item list-group-item-danger"><a href="/authenticate/account/delete">Delete account</a></li>
+                              </ul>
+                        </div>
                   </div>
                   <div class="col-8">
-                        <div class="row">
-                              <h3>Your selling products</h3>
-                              <div class="list-group">
-                              {% if selling_products.count > 0 %}
-                                    {% for product in selling_products %}
-                                          <a href="/product/{{product.id}}" class="list-group-item list-group-item-action mt-2">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                      <h5 class="mb-1">{{product.title}}</h5>
-                                                      <small>{{product.created_at}}</small>
-                                                </div>
-                                                <p class="mb-1">{{product.description}}</p>
+                        <div class="row title">Your selling products</div>  
+                        {% if selling_products.count > 0 %}
+                              {% for product in selling_products %}     
+                                    <div class="row p-2">
+                                          <div class="col-2">
+                                                {% if product.product_image %}
+                                                      <img src="{{product.product_image.url}}" class="image-w-100-px"/>
+                                                {% else %}
+                                                      <img src="{% static 'svgs/undraw_photo.svg' %}" class="image-w-100-px"/>
+                                                {% endif %}
+                                          </div>
+                                          <div class="col-8">
+                                                <a href="/product/{{product.id}}">
+                                                      <h5>{{product.title}}</h5>
+                                                </a>
+                                                <small>{{product.created_at}}</small>
+                                                <p>{{product.description}}</p>
                                                 <small>{{product.price}}$</small>
-                                          </a><a class="list-group-item" href="/product/{{product.id}}/delete">Remove product</a>
-                                    {% endfor %}
-                              
-                              {% else %}
-                                    <p> You haven't placed a product to sell yet! </p>
-                              {% endif %}
-                              </div>
-                        <div>
-                        <div class="row mt-4">
-                              <h3 class=" ml-4">Previous orders:</h3>
-                              <div class="list-group">
+                                          </div>
+                                          <div class="col-2">
+                                                <a href="/product/{{product.id}}/delete" class="delete-icon"><span class="material-icons">delete_outline</span></a>
+                                          </div>
+                                    </div>
+                              {% endfor %}
+                        {% else %}
+                              <p> You haven't placed a product to sell yet! </p>
+                        {% endif %}
+                        
+                        <div class="row title">Previous orders:</div>
+                        <div class="row">
+                              <div class="col-12 list-group">
                               {% if orders.count > 0 %}
                                     <table class="table">
                                           <thead>
@@ -78,7 +96,7 @@
                                                 </tr>
                                           {% endfor %}
                                           </tbody>
-                                    </table>                              
+                                    </table>
                               {% else %}
                                     <p> You don't have any order yet! </p>
                               {% endif %}

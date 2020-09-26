@@ -7,17 +7,7 @@
 
 .profile-image {
       border-radius: 50%;
-      width: 200px;
-}
-
-.register {
-      /* border: 1px solid #ddd; */
-      /* padding: 10px; */
-      /* background-color: #ffffff; */
-      /* border-radius: 6px; */
-      /* -webkit-box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
-      -moz-box-shadow: 5px 5px 5px -5px rgba(221,221,221,1);
-      box-shadow: 5px 5px 5px -5px rgba(221,221,221,1); */
+      width: 100px;
 }
 
 .register-illustration {
@@ -30,4 +20,25 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
+}
+
+.title {
+      text-transform: uppercase;
+      font-size: 1.2em;
+      font-weight: 600;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      margin: 5px;
+}
+
+.image-w-100-px {
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+}
+
+.delete-icon {
+      padding: 15px;
+      color: #cc0000;
+      margin: 10px;     
 }
